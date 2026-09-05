@@ -1,0 +1,12 @@
+# Cargo
+/target
+
+# Rust backup files
+**/*.rs.bk
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code temporary files
+.vscode/*.log

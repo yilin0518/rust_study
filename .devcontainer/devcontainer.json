@@ -1,0 +1,43 @@
+{
+    "name": "Rust Career Lab",
+
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+    "features": {
+        "ghcr.io/devcontainers/features/rust:1": {
+            "version": "stable",
+            "profile": "default",
+            "components": "rust-analyzer,rust-src,rustfmt,clippy"
+        }
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "tamasfe.even-better-toml",
+                "vadimcn.vscode-lldb",
+                "usernamehw.errorlens"
+            ],
+
+            "settings": {
+                "editor.formatOnSave": true,
+
+                "[rust]": {
+                    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+                    "editor.formatOnSave": true
+                },
+
+                "rust-analyzer.check.command": "clippy",
+
+                "rust-analyzer.inlayHints.typeHints.enable": true,
+                "rust-analyzer.inlayHints.parameterHints.enable": true,
+                "rust-analyzer.inlayHints.chainingHints.enable": true
+            }
+        }
+    },
+
+    "postCreateCommand": "rustc --version && cargo --version && cargo clippy --version",
+
+    "remoteUser": "vscode"
+}
