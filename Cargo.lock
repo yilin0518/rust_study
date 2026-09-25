@@ -5,3 +5,7 @@ version = 4
 [[package]]
 name = "day1_tcp_echo"
 version = "0.1.0"
+
+[[package]]
+name = "day2_thread_server"
+version = "0.1.0"

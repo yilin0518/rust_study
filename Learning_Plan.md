@@ -407,6 +407,30 @@ The immediate objective is:
 
 > Progress from a blocking TCP server to an asynchronous Tokio-based concurrent network service while understanding each abstraction introduced along the way.
 
+This foundation is now the first stage of a time-bounded internship preparation
+plan. The sequence is intentionally Rust-first: complete the blocking/threaded
+networking progression, learn Future and Tokio, and finish an independently
+understood Redis-clone project before starting Go backend engineering. Interview
+fundamentals may continue in parallel, but Go project work does not begin yet.
+
+The detailed revised plan is maintained in:
+
+```text
+docs/internship_roadmap_6_months.md
+```
+
+Near-term targets:
+
+- By approximately Week 10, complete the Rust networking/Redis-clone stage with
+  independent tests, extensions, and a performance or failure-analysis report.
+- Start Go only after that Rust completion gate.
+- Around Weeks 16–18, deliver the first employable Go business-backend version
+  and begin broader backend applications.
+- By Week 24, retain one mature Rust network system and one mature Go backend
+  project; a third project is optional and must not reduce their quality.
+- Defer AI infrastructure until the backend, database, messaging, reliability,
+  and service-governance foundations are established.
+
 ---
 
 # 10. Employment-Oriented Roadmap
@@ -444,16 +468,22 @@ Data structures and algorithms, Linux, computer networks, databases, English
 technical reading, system design, and job tracking are continuous parallel
 tracks throughout the year.
 
-The schedule is milestone-based. A "day" in an exercise plan is a learning
-unit and may take more than one calendar day. Move forward only when the
-completion evidence is met.
+The schedule is milestone-based. Older "Day" labels describe the original
+sequence, not calendar days or boundaries for new learning documents. Move
+forward only when the relevant completion evidence is met.
 
-Before each learning unit, prepare both a teaching plan and a Chinese learning
-document. The learning document should include a small set of relevant Chinese
-or English references, label required versus optional reading, and explain what
-to focus on. Prefer official documentation and high-quality primary material.
-Reading supports the current experiment and must not replace implementation,
-prediction, observation, and explanation.
+For each new topic, prepare one self-contained Chinese learning document under
+`docs/.../study_materials/`, named for its content rather than a day number.
+Keep the whole topic in that document even if it takes several sessions. It
+should explain prerequisites, language and systems models, API contracts,
+design tradeoffs, prediction questions, incremental implementation tasks,
+commands, experiments, common errors, graduated hints, reflection questions,
+references, and completion evidence. Label required and optional reading;
+prefer official documentation and primary sources. Reading supports experiments
+and does not replace prediction, implementation, observation, and explanation.
+Chat should point to the current section and review the learner's work. A
+separate teaching plan is optional; it must not split the learning content into
+day or session fragments.
 
 ---
 
@@ -621,8 +651,17 @@ Current position:
 
 ```text
 Week 1
-└── Day 2 — Thread-per-connection server
+├── Thread-per-connection server: implementation and two-client behavior verified
+└── Current topic: Future, poll, Waker, and a minimal executor
 ```
+
+The Day 2 server now has an owned connection handler, one thread per connection,
+an `Arc<Mutex<usize>>` active-connection count, and read/write error handling.
+Two-client Echo and the count returning to zero were verified by the learner.
+The optional thread-resource observation was skipped at the learner's request.
+The learner explained why immediate `join()` blocks the accept loop and
+identified the roles of `Send` and `Sync`. The next topic is documented in
+`docs/week1/study_materials/future_poll_waker_executor.md`.
 
 Completed concepts:
 
@@ -802,52 +841,33 @@ This observed limitation is the motivation for Day 2.
 
 # 13. Current Exercise
 
-I am starting Day 2: moving each accepted connection to its own OS thread.
-
-The current task is to create `week1/day2_thread_server` and first extract the
-Day 1 per-connection behavior into a function that owns its `TcpStream`:
-
-```text
-main thread
-  accept()
-     ↓
-owned TcpStream
-     ↓
-handle_connection(stream, addr)
-```
-
-After the handler works without threads, the next experiment should attempt to
-use it with `thread::spawn`, inspect the ownership or lifetime error, and then
-reason about `move`, `Send`, and `'static` before fixing it.
+Work through the self-contained topic document
+`docs/week1/study_materials/future_poll_waker_executor.md`. Start with the
+prediction and experiment in Stage A: calling an `async fn` creates a Future,
+but does not itself run the function body. Then implement a small manual Future
+and a minimal wake-driven executor without Tokio.
 
 ---
 
 # 14. Important Instruction for Continuing From Here
 
-When continuing this learning session, do NOT jump directly to Tokio or provide
-the complete thread-per-connection implementation before I attempt it.
-
-Continue from the Day 2 handler extraction.
-
-The intended progression is:
+Use topic-based learning documents rather than dividing new material by day.
+For the current topic, preserve the progression:
 
 ```text
-extract connection handler
+create an inert Future
   ↓
-attempt thread::spawn
+poll a small manually implemented Future
   ↓
-understand the compiler error
+return Pending and arrange a wakeup
   ↓
-closure capture and move
+drive it with a minimal executor
   ↓
-ownership transfer
-  ↓
-Send and 'static
-  ↓
-verify concurrent clients
-  ↓
-identify thread-per-connection costs
+connect the model to future async network I/O
 ```
+
+Do not jump directly to Tokio or provide the complete exercise implementation
+before the learner attempts each stage.
 
 At each important step:
 
