@@ -1,5 +1,7 @@
 # Rust 后端与基础设施工程师一年学习路线
 
+> 历史路线：2026-10-13 起由 [当前一年后端路线](backend/roadmap_one_year.md) 与 [12 周计划](backend/roadmap_12_weeks.md) 替代。本文保留旧目标与学习记录；下文的时间表、技术栈和材料规则不再作为当前执行指令。最新状态见 [LEARNING_PLAN](../LEARNING_PLAN.md)。
+
 ## 目标定位
 
 目标岗位：**Rust 后端/基础设施工程师**。

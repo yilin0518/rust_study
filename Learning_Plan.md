@@ -1,878 +1,148 @@
-# Rust Career Learning Plan
+# Backend Career Learning Plan
 
-## 1. Background
+更新日期：2026-10-13。本文是当前目标、学习阶段与下一任务的主要状态入口。
+详细任务、项目契约和证据分别放在链接文档中，避免反复维护多份完整日程。
 
-I am a first-year master's student currently conducting research related to Rust.
+## 1. Background — 个人背景
 
-I have approximately **one year to prepare for Rust-related employment**.
+研一学生，从事 Rust 相关研究，计划用未来一年准备互联网公司通用后端开发岗位，优先争取实习。
 
-My current Rust foundation:
+- 已读完 Rust Book 与 Tokio 官方教程，不从基础语法或 Tokio 入门重新开始。
+- 已学习 TCP Socket、阻塞/非阻塞 IO、Future/Waker/任务调度与 IO 多路复用等；具体独立掌握程度通过变体实验验证。
+- 有 Rust 研究与项目开发经验；当前需要补足完整后端服务的设计、数据库、测试、部署、故障排查和工程交付。
+- 有 C++ 基础，使用 C++ 进行算法训练。算法能力与 C++ 后台工程能力分开评估。
+- 操作系统、网络与底层基础按后端项目及面试需要整理，不预设所有概念已熟练掌握。
+- 暂按每周 20～25 小时规划，基准 22 小时；研究与实际可用时间变化时重新估时。
 
-- I have completed *The Rust Programming Language* (the official Rust Book).
-- I understand the core Rust language concepts, including:
-  - Ownership and borrowing
-  - Lifetimes
-  - Traits and generics
-  - Enums and pattern matching
-  - `Box`, `Rc`, `Arc`
-  - `RefCell`, interior mutability
-  - Basic concurrency concepts
-  - Basic `Future` / `async` / `await` concepts
-- However, most of my experience is still at the level of **learning language concepts**.
-- I currently lack substantial engineering experience building real Rust systems.
+## 2. Goal — 就业定位
 
-Therefore, the focus of this repository is **not to relearn Rust syntax**, but to develop practical Rust engineering skills through progressively more realistic projects.
+主要目标：互联网公司通用后端开发实习及校园招聘。岗位范围包括业务服务、服务架构、基础架构与高并发服务，不限制为 Rust 岗位。
 
----
+近期策略：
 
-# 2. Long-Term Goal
+1. Rust 是当前项目语言，栈为 Tokio、Axum、MySQL、SQLx、Redis、Linux、Docker。
+2. C++ 是算法训练语言，从第一周同步练习和复做。
+3. 两个项目顺序明确：先完成 Rust 后端项目的核心验收，再学习 Go 并实现第二个后端项目。Go 是确定的下一阶段，当前集中在 Rust；Java 仅在具体岗位需要时另行评估。
+4. 不因为使用 Rust 自动假定符合所有岗位；需要核对语言、毕业年份、实习到岗时间与每周天数等条件。
+5. AI Infra 是后续可选方向，先建立 HTTP、SQL、事务、可靠性、部署与可观测性能力。
 
-My goal is to become employable for Rust-related engineering positions within approximately one year.
+验收目标：能够独立设计、实现、测试、部署、调试和解释一个完整后端系统，并用实际证据说明正确性、性能与失败边界。
 
-My target position is:
-
-> **Rust backend / infrastructure engineer, with a focus on high concurrency,
-> databases, and distributed systems, followed by AI inference and compute
-> infrastructure.**
-
-The learning order is deliberate:
-
-1. Become a capable production backend engineer.
-2. Develop systems depth in networking, storage, distributed systems, and performance.
-3. Apply those skills to AI inference and compute infrastructure.
-
-Embedded Rust is no longer a primary track for this plan. It may be revisited
-later, but it should not compete with backend and infrastructure preparation
-during the current one-year employment window.
-
-Both directions require strong foundations in:
-
-- Systems programming
-- Network programming
-- Concurrency
-- Asynchronous programming
-- Performance engineering
-- Linux
-- Distributed systems fundamentals
-
-Therefore, the first phase of this learning plan focuses heavily on:
-
-> **Rust networking + concurrency + async programming**
-
-The goal is not simply to know how to use Tokio APIs.
-
-I want to understand the progression:
+## 3. Active Roadmap — 当前路线
 
 ```text
-OS / TCP / blocking I/O
-        ↓
-Threads
-        ↓
-Concurrency
-        ↓
-Future
-        ↓
-async / await
-        ↓
-Runtime
-        ↓
-Tokio
-        ↓
-Async network services
-        ↓
-Backend / distributed systems / AI Infra
+已有 Rust / TCP / Future / Tokio 基础
+  → HTTP / Axum / 商品 API
+  → MySQL / SQLx / 持久化与迁移
+  → 订单 / 事务 / 防超卖 / 幂等
+  → 认证权限 / Redis 缓存 / 失效与故障
+  → 可靠后台任务 / 重试 / 恢复
+  → Linux / Docker / CI / 指标 / 性能与故障报告
+  → Rust 核心验收与复盘
+  → Go 基础 / HTTP / 并发 / context / 测试
+  → Go 团队协作与工单服务（第二项目暂定选题）
+  → 实习、系统深度与后续基础设施方向
 ```
 
----
+主项目为 Mini Order Service。直接从现有 Axum 示例演进；原 Echo、Future、Mini Redis 保留为补充实验。
+不再以完成 Redis Clone 复制/事务等高级功能作为学习业务后端或补岗位语言的前置门槛。
+Rust 项目用来建立后端知识模型；Go 项目用来迁移这些模型并掌握 Go 的工程方式。第二项目不必完整重写订单服务，具体选题在切换阶段确认。
 
-# 3. One-Year Target
+当前执行文档：
 
-After approximately one year, I want to be capable of independently building and understanding non-trivial Rust systems.
+- [学习入口](docs/backend/README.md)
+- [12 周计划](docs/backend/roadmap_12_weeks.md)
+- [一年路线](docs/backend/roadmap_one_year.md)
+- [Rust → Go 阶段切换与第二项目](docs/backend/go_project_phase.md)
+- [项目版本与接口约定](docs/backend/mini_order_service.md)
+- [基础知识与阅读资料](docs/backend/foundations_and_resources.md)
+- [算法训练与错题机制](docs/backend/algorithm_training.md)
+- [进度、问题、周复盘与岗位表](docs/backend/progress.md)
 
-Employment readiness means more than knowing Rust syntax. I should have
-evidence that I can design, implement, test, deploy, observe, debug, and explain
-a production-oriented service.
+旧的 [一年 Rust 路线](docs/career_roadmap.md)、[Rust → Go 实习路线](docs/internship_roadmap_6_months.md) 是历史参考，已由本路线替代。
+旧学习计划及具体 TCP 学习证据完整保存在 [迁移前快照](docs/archive/learning_plan_before_backend_2026-10-13.md)。
 
-I should be comfortable with the following areas.
+## 4. Four Tracks — 四条主线
 
-## Rust
+| 主线 | 核心任务 | 证据 |
+|---|---|---|
+| 项目 | 先 Rust Mini Order Service，再 Go 后端项目 | 自己实现的代码、API/数据模型、边界与集成测试、部署、报告 |
+| 基础 | HTTP/TCP、OS、MySQL、Redis、Linux；后续可靠性与系统设计 | 自己的解释、SQL/命令实验、与项目关联的知识卡 |
+| 算法 | C++，每周约 3～4 新题加到期复做与限时练习 | 复杂度、耗时、提示依赖、边界、闭卷复做与变体 |
+| 面试与求职 | 岗位分析、项目追问、简历、模拟、符合条件时投递 | 岗位条件表、回答缺口、阶段反馈与下一调整 |
 
-- Ownership / borrowing / lifetimes
-- Traits and generics
-- Error handling
-- Smart pointers
-- Interior mutability
-- `Send` / `Sync`
-- Threads
-- Atomics
-- Channels
-- `Arc` / `Mutex` / `RwLock`
-- Futures
-- async / await
-- Pinning
-- Basic unsafe Rust
-- Cargo workspace and project organization
+基准日程：D1～D5 每天 3 小时、D6 4 小时、D7 3 小时，总计 22 小时。
+周末包括复验、错题与复盘；剩余时间用作缓冲，不强制新增功能。
+日程是可调整的学习单元，不代表自然日已发生或固定毕业期限。
 
-## Networking
+## 5. Project Gates — 项目阶段门槛
 
-- TCP / UDP fundamentals
-- Socket programming
-- Blocking vs non-blocking I/O
-- TCP byte-stream semantics
-- Application-level protocols
-- HTTP fundamentals
-- Connection management
-- Basic network debugging
+- V0：内存商品 CRUD；HTTP 方法/状态、共享状态、错误路径与基础测试。
+- V1：MySQL 持久化、参数化 SQL、迁移、连接池、测试隔离；日志、配置与基础 CI。
+- V2：订单与价格快照、事务、防超卖、请求幂等、状态迁移与重复取消。
+- V3：身份/权限、商品缓存、TTL/失效/故障、基础限流。
+- V4：同事务产生后台事件、可恢复消费、重复处理、重试上限；Broker 为选做。
+- V5：容器部署、优雅关闭、指标、性能基线、故障报告、README 与面试叙述。
 
-## Async Rust
+核心不变量和具体测试见项目契约。单商品订单先实现，真实支付、多商品订单、微服务、分布式事务和完整商城不列为前 12 周必做。
+日志、配置、测试与 CI 随项目演进，不等到最后版本才引入。
+进入 Go 的核心门槛：HTTP/SQL/事务、防超卖与幂等、权限、缓存边界、自动化测试、部署与日志，以及一份基本故障/性能证据能够独立解释。完整 Broker 集成、复杂后台调度与极致性能优化可以留待后续，不无限推迟 Go。具体门槛见 [阶段切换](docs/backend/go_project_phase.md)。
 
-I should understand rather than merely use:
+## 6. Teaching and Review — 教学方式
 
-- `Future`
-- `poll`
-- `Poll::Ready`
-- `Poll::Pending`
-- `Waker`
-- async state machines
-- executors
-- reactors
-- Tokio runtime
-- async I/O
-- task scheduling
-- cancellation
-- channels
-- synchronization
-
-## Backend Engineering
-
-Eventually I should be able to work with:
-
-- Tokio
-- Axum or similar frameworks
-- HTTP APIs
-- SQL databases
-- Redis
-- serialization
-- logging / tracing
-- configuration
-- testing
-- observability
-- graceful shutdown
-- production-oriented project organization
-
-## Systems / AI Infrastructure
-
-Later stages should introduce:
-
-- Linux systems programming
-- Memory and performance analysis
-- Profiling
-- Zero-copy concepts
-- High-performance networking
-- RPC
-- gRPC
-- Distributed systems fundamentals
-- Storage systems
-- Caching
-- Queues
-- Scheduling
-- Rust/Python interoperability
-- AI serving / inference infrastructure concepts
-
----
-
-# 4. Learning Philosophy
-
-This repository is primarily a **coding training repository**.
-
-The learning ratio should roughly be:
+遵循 AGENTS.md：导师 + reviewer + 学习指导，学习者独立编码。
 
 ```text
-30% reading / theory
-70% coding / experiments / debugging
+解释问题 → 预测 → 小任务 → 学习者实现
+  → 观察 → review → 学习者解释 → 下一个问题
 ```
 
-Avoid spending large amounts of time passively reading tutorials.
-
-The preferred learning cycle is:
-
-```text
-Learn one concept
-        ↓
-Predict program behavior
-        ↓
-Write a small experiment
-        ↓
-Run it
-        ↓
-Observe the result
-        ↓
-Explain why
-        ↓
-Modify the program
-        ↓
-Encounter limitations
-        ↓
-Learn the next concept
-```
-
-Projects should evolve naturally from limitations in previous implementations.
-
-For example:
-
-```text
-Blocking TCP Server
-        ↓
-"Why can't it handle clients concurrently?"
-        ↓
-Thread-per-connection Server
-        ↓
-"What happens with thousands of connections?"
-        ↓
-Non-blocking / async concepts
-        ↓
-Future
-        ↓
-Tokio
-```
-
-I prefer learning this way instead of learning APIs independently without understanding why they exist.
-
----
-
-# 5. How Codex Should Help Me
-
-Codex should behave primarily as a:
-
-> **Rust mentor + code reviewer + learning guide**
-
-rather than an implementation agent.
-
-The purpose is to improve my ability to write Rust independently.
-
-## Important Rule: Do Not Immediately Give Me Complete Solutions
-
-When I am doing a learning exercise, Codex should normally NOT immediately generate the complete implementation.
-
-Prefer this process:
-
-1. Explain the relevant concept.
-2. Give me a small, concrete task.
-3. Let me implement it.
-4. Review my implementation.
-5. Point out bugs, design problems, and Rust-specific issues.
-6. Ask me to reason about important behavior.
-7. Give hints when necessary.
-8. Only provide a complete implementation when:
-   - I explicitly request it, or
-   - I am genuinely stuck after attempting the task.
-
-For example, instead of immediately implementing a TCP Echo Server, guide me through:
-
-```text
-TcpListener::bind
-        ↓
-accept
-        ↓
-TcpStream
-        ↓
-Read
-        ↓
-Write
-        ↓
-loop
-        ↓
-connection close
-```
-
----
-
-# 6. Code Review Expectations
-
-When I submit code, review it from several perspectives.
-
-## Correctness
-
-Check for:
-
-- Incorrect assumptions
-- Edge cases
-- Resource handling
-- Network behavior
-- Error handling
-
-## Rust Semantics
-
-Pay particular attention to:
-
-- Ownership
-- Borrowing
-- Lifetimes
-- Moves
-- `Send` / `Sync`
-- Smart pointer usage
-- Error propagation
-
-## Engineering Quality
-
-Consider:
-
-- API design
-- Function boundaries
-- Naming
-- Error handling
-- Maintainability
-- Testability
-- Project organization
-
-## Performance
-
-When relevant, discuss:
-
-- Allocations
-- Copies
-- Blocking
-- Lock contention
-- Task/thread overhead
-- Memory usage
-
-However, do not prematurely optimize simple learning exercises.
-
----
-
-# 7. Ask Me to Predict Behavior
-
-An important part of the learning process is reasoning before execution.
-
-Codex should frequently ask questions such as:
-
-- Will this call block?
-- Who owns this value?
-- What happens when this variable is dropped?
-- What does this `read()` return?
-- What happens when the client disconnects?
-- Can two threads access this value?
-- Is this type `Send`?
-- Why does the compiler reject this?
-- What happens if 1,000 clients connect?
-- Where is the task suspended at `.await`?
-
-I should attempt to answer before Codex explains the result.
-
----
-
-# 8. Repository Structure
-
-This repository uses a Cargo Workspace.
-
-The approximate structure is:
-
-```text
-.
-├── Cargo.toml
-├── README.md
-├── LEARNING_PLAN.md
-│
-├── .devcontainer/
-├── .vscode/
-│
-├── week1/
-│   ├── day1_tcp_echo/
-│   ├── day2_thread_server/
-│   ├── day3_future/
-│   ├── day4_tokio_echo/
-│   └── day5_chat_server/
-│
-└── projects/
-```
-
-Each learning exercise should generally be a small independent crate.
-
-The repository should gradually become both:
-
-1. A learning record
-2. A Rust engineering portfolio
-
-Therefore, code quality should improve over time.
-
----
-
-# 9. Current Phase
-
-I am currently in:
-
-> **Phase 1 — Rust Networking, Concurrency, and Async Foundations**
-
-The immediate objective is:
-
-> Progress from a blocking TCP server to an asynchronous Tokio-based concurrent network service while understanding each abstraction introduced along the way.
-
-This foundation is now the first stage of a time-bounded internship preparation
-plan. The sequence is intentionally Rust-first: complete the blocking/threaded
-networking progression, learn Future and Tokio, and finish an independently
-understood Redis-clone project before starting Go backend engineering. Interview
-fundamentals may continue in parallel, but Go project work does not begin yet.
-
-The detailed revised plan is maintained in:
-
-```text
-docs/internship_roadmap_6_months.md
-```
-
-Near-term targets:
-
-- By approximately Week 10, complete the Rust networking/Redis-clone stage with
-  independent tests, extensions, and a performance or failure-analysis report.
-- Start Go only after that Rust completion gate.
-- Around Weeks 16–18, deliver the first employable Go business-backend version
-  and begin broader backend applications.
-- By Week 24, retain one mature Rust network system and one mature Go backend
-  project; a third project is optional and must not reduce their quality.
-- Defer AI infrastructure until the backend, database, messaging, reliability,
-  and service-governance foundations are established.
-
----
-
-# 10. Employment-Oriented Roadmap
-
-The detailed roadmap is maintained in:
-
-```text
-docs/career_roadmap.md
-```
-
-The main progression is:
-
-```text
-Networking / concurrency / async foundations
-        ->
-Production Rust backend engineering
-        ->
-Databases / storage / distributed systems / performance
-        ->
-AI inference and compute infrastructure
-```
-
-Three portfolio projects should evolve throughout the year instead of being
-discarded after short exercises:
-
-1. A production-oriented backend service using Axum, PostgreSQL, Redis,
-   testing, observability, Docker, and CI.
-2. A networked key-value system that gradually gains protocol framing,
-   persistence, concurrency control, performance testing, and selected
-   distributed-system features.
-3. An AI inference gateway or scheduler connecting a Rust service to Python
-   model workers, with batching, backpressure, metrics, and failure handling.
-
-Data structures and algorithms, Linux, computer networks, databases, English
-technical reading, system design, and job tracking are continuous parallel
-tracks throughout the year.
-
-The schedule is milestone-based. Older "Day" labels describe the original
-sequence, not calendar days or boundaries for new learning documents. Move
-forward only when the relevant completion evidence is met.
-
-For each new topic, prepare one self-contained Chinese learning document under
-`docs/.../study_materials/`, named for its content rather than a day number.
-Keep the whole topic in that document even if it takes several sessions. It
-should explain prerequisites, language and systems models, API contracts,
-design tradeoffs, prediction questions, incremental implementation tasks,
-commands, experiments, common errors, graduated hints, reflection questions,
-references, and completion evidence. Label required and optional reading;
-prefer official documentation and primary sources. Reading supports experiments
-and does not replace prediction, implementation, observation, and explanation.
-Chat should point to the current section and review the learner's work. A
-separate teaching plan is optional; it must not split the learning content into
-day or session fragments.
-
----
-
-# 11. Week 1 Plan
-
-The first week focuses on networking, concurrency, async foundations, and
-protocol correctness. Chat and Mini KV are moved to later project phases so
-the foundations are not rushed.
-
-## Day 1 — Blocking TCP
-
-Topics:
-
-- `TcpListener`
-- `TcpStream`
-- sockets
-- `bind`
-- `accept`
-- `Read`
-- `Write`
-- blocking I/O
-- TCP byte streams
-- connection termination
-
-Target:
-
-Build a TCP Echo Server using only the Rust standard library.
-
-No Tokio.
-
----
-
-## Day 2 — Threads and Concurrency
-
-Upgrade the blocking server to support multiple clients.
-
-Topics:
-
-- `std::thread`
-- `thread::spawn`
-- ownership across threads
-- `move`
-- `Send`
-- `Arc`
-- `Mutex`
-- thread-per-connection model
-
-Important question:
-
-> Why doesn't a simple blocking server handle multiple clients well?
-
-Then:
-
-> Why isn't creating one OS thread for every connection an ideal solution at large scale?
-
----
-
-## Day 3 — Future and Async Fundamentals
-
-Understand why async Rust exists.
-
-Topics:
-
-- blocking vs non-blocking
-- cooperative execution
-- `Future`
-- `poll`
-- `Poll`
-- `Ready`
-- `Pending`
-- `Context`
-- `Waker`
-- basic executor concepts
-
-The goal is not to memorize the `Future` trait.
-
-The goal is to understand conceptually:
-
-```text
-Future
-    ↓
-poll()
-    ↓
-Ready(value)
-
-or
-
-Pending
-    ↓
-wake me later
-```
-
----
-
-## Day 4 — Tokio
-
-Rewrite the TCP server using Tokio.
-
-Topics:
-
-- Tokio runtime
-- async main
-- async `TcpListener`
-- async `TcpStream`
-- `.await`
-- `tokio::spawn`
-- tasks vs threads
-
-Compare directly with the Day 1 blocking implementation.
-
----
-
-## Day 5 — Async Connection Lifecycle
-
-Make the Tokio Echo Server robust under multiple clients.
-
-Topics:
-
-- multiple connections
-- Tokio tasks
-- connection lifecycle
-- task ownership
-- cancellation
-- timeouts
-- graceful shutdown
-- basic error propagation
-
----
-
-## Day 6 — Protocol Framing and Tests
-
-Turn the byte-stream experiment into a small framed protocol and test its
-boundaries.
-
-Topics:
-
-- protocol parsing
-- TCP packet/message boundary mismatch
-- newline or length-prefix framing
-- partial reads and multiple frames in one read
-- unit tests for parsing
-- integration tests for network behavior
-
----
-
-## Day 7 — Review and Refactoring
-
-Review everything from the week.
-
-Tasks:
-
-- Refactor code
-- Improve error handling
-- Add README documentation
-- Compare blocking/thread/async architectures
-- Explain important concepts without looking at notes
-- Identify weak areas
-- Plan Week 2 based on actual progress
-
----
-
-# 12. Current Progress
-
-Current position:
-
-```text
-Week 1
-├── Thread-per-connection server: implementation and two-client behavior verified
-└── Current topic: Future, poll, Waker, and a minimal executor
-```
-
-The Day 2 server now has an owned connection handler, one thread per connection,
-an `Arc<Mutex<usize>>` active-connection count, and read/write error handling.
-Two-client Echo and the count returning to zero were verified by the learner.
-The optional thread-resource observation was skipped at the learner's request.
-The learner explained why immediate `join()` blocks the accept loop and
-identified the roles of `Send` and `Sync`. The next topic is documented in
-`docs/week1/study_materials/future_poll_waker_executor.md`.
-
-Completed concepts:
-
-### `TcpListener`
-
-I understand that:
-
-```rust
-TcpListener::bind("127.0.0.1:8080")
-```
-
-creates/binds a server-side listening socket.
-
-`TcpListener` is responsible for accepting new TCP connections.
-
-Multiple clients may connect to the same server listening port.
-
----
-
-### `accept()`
-
-I understand:
-
-```rust
-let (stream, addr) = listener.accept().unwrap();
-```
-
-When there is no pending client connection:
-
-```text
-accept()
-   ↓
-current thread blocks
-   ↓
-OS waits for a connection
-   ↓
-connection arrives
-   ↓
-thread continues
-```
-
-`accept()` returns:
-
-- `TcpStream`
-- `SocketAddr`
-
-`TcpStream` represents the local Rust handle/abstraction for one established TCP connection.
-
-`SocketAddr` identifies the peer using its IP address and port.
-
----
-
-### TCP Connections
-
-I understand that clients can all connect to the same server port while still having independent TCP connections.
-
-Conceptually:
-
-```text
-Client A :51001 ────── Server :8080
-Client B :51002 ────── Server :8080
-Client C :51003 ────── Server :8080
-```
-
-A TCP connection can be identified by the source/destination IP and port tuple.
-
----
-
-### Blocking `read()`
-
-I understand that:
-
-```rust
-stream.read(&mut buffer)
-```
-
-also blocks when the connection is established but no data is currently available.
-
-Therefore, I currently understand two important blocking points:
-
-```text
-accept()
-   ↓
-wait for connection
-
-read()
-   ↓
-wait for data
-```
-
----
-
-### `Read::read`
-
-Given:
-
-```rust
-let mut buffer = [0u8; 1024];
-
-let n = stream.read(&mut buffer).unwrap();
-```
-
-I understand that `n` is the number of bytes actually read.
-
-Therefore, valid data is generally:
-
-```rust
-&buffer[..n]
-```
-
-rather than the entire 1024-byte buffer.
-
----
-
-### TCP Is a Byte Stream
-
-I have been introduced to the fact that TCP is a byte-stream protocol.
-
-There is NOT necessarily a one-to-one relationship:
-
-```text
-send() → read()
-```
-
-For example:
-
-```text
-Client:
-
-send("hello")
-send("world")
-```
-
-does not guarantee:
-
-```text
-Server:
-
-read() → "hello"
-read() → "world"
-```
-
-The server may observe different byte groupings.
-
-This concept still needs further practical experimentation.
-
----
-
-### `Write::write_all` and TCP shutdown
-
-I implemented echoing only the valid bytes with `&buffer[..n]` and verified it
-with a PowerShell TCP client.
-
-I understand that `write_all` first hands all bytes to the local operating
-system. The TCP stack delivers them reliably and in order; a client can still
-read already delivered data before observing EOF after the peer closes.
-
----
-
-### `read() == 0`
-
-I observed that an orderly client disconnect makes the server's next `read()`
-return `Ok(0)`. I handle this case by leaving the connection loop, avoiding a
-busy loop that repeatedly reads zero bytes.
-
----
-
-### Single-threaded connection limitation
-
-I implemented an outer accept loop and an inner read/echo loop. The server can
-serve clients sequentially, but I verified that it cannot actively process
-client B while it is blocked reading from client A.
-
-This observed limitation is the motivation for Day 2.
-
----
-
-# 13. Current Exercise
-
-Work through the self-contained topic document
-`docs/week1/study_materials/future_poll_waker_executor.md`. Start with the
-prediction and experiment in Stage A: calling an `async fn` creates a Future,
-but does not itself run the function body. Then implement a small manual Future
-and a minimal wake-driven executor without Tokio.
-
----
-
-# 14. Important Instruction for Continuing From Here
-
-Use topic-based learning documents rather than dividing new material by day.
-For the current topic, preserve the progression:
-
-```text
-create an inert Future
-  ↓
-poll a small manually implemented Future
-  ↓
-return Pending and arrange a wakeup
-  ↓
-drive it with a minimal executor
-  ↓
-connect the model to future async network I/O
-```
-
-Do not jump directly to Tokio or provide the complete exercise implementation
-before the learner attempts each stage.
-
-At each important step:
-
-> Ask me to predict what will happen before explaining the answer.
-
-The goal is not to finish exercises as quickly as possible.
-
-The goal is for me to eventually be able to design, implement, debug, and explain Rust systems independently.
+- 不自动生成完整项目；先给 API 约定、测试要求、概念与分级提示。
+- 先 review 正确性、Rust 语义、系统行为，再讨论工程质量和必要性能。
+- 教育性编译错误先解释保护规则，让学习者尝试修复。
+- 每个重要实验先预测，不替学习者提前运行并直接公布答案。
+- 学习材料按主题组织，放在 `docs/backend/study_materials/`，不把一个主题拆成每日片段。
+- 每份材料包括模型、API 约束、取舍、预测、增量任务、命令、错误、提示、反思、资料和验收；资料标注必读/选读。
+- 进度以自己的代码、实验结果、预测与独立解释为依据；编译成功不等于理解。
+- 有意义的里程碑后建议写 README/说明与清晰的提交记录；不自动提交或推送。
+
+## 7. Current Progress — 当前进度
+
+| 内容 | 当前状态 |
+|---|---|
+| Rust Book、Tokio 官方教程 | 学习者报告已读完 |
+| 阻塞与线程 Echo | 有历史实现、两客户端和计数验证；旧计划保留解释证据 |
+| Future/Waker/executor | `week1/future_poll_lab` 有代码，本次路线迁移未进行新验收 |
+| Tokio Echo、Mini Redis、channel | `examples` 有练习代码；本次未重跑或标记独立掌握 |
+| Axum | `examples/axum_1` 有 Hello World；Cargo.lock 中 Axum 0.7.9 |
+| Mini Order Service | V0～V5 均待验收 |
+| Go 与第二个后端项目 | 下一阶段已确定，尚未开始；Rust 核心验收后进入 |
+| C++ 算法与岗位基线 | 待诊断与收集，不虚构题数或投递记录 |
+
+当前新路线位置：**Week 1 / Day 1（W01-D1），待开始/待验收**。
+这是新计划入口，不是已经完成一天的声明；旧网络 Week 1 仅为历史编号。
+
+## 8. Current Exercise — 当前练习
+
+学习 [HTTP、Axum 与内存商品服务](docs/backend/study_materials/http_axum_in_memory_products.md)。
+
+下一步：
+
+1. 阅读现有 `examples/axum_1/src/main.rs`，回答材料 §3 的预测问题。
+2. 自己实现 §4 增量 A：保留现有入口，增加 `GET /healthz` 与固定商品列表 `GET /products`。
+3. 用 `curl.exe -i` 记录状态、响应头、body 与预测差异，解释路径。
+4. C++ 尝试“两数之和”，记录实际水平、提示与复杂度。
+5. 将代码和观察结果提交 review，再进入详情查询和共享状态。
+
+当前不直接接 MySQL 或生成订单服务实现。下一主题的中文材料在进入持久化阶段前建立。
+
+## 9. Maintenance — 持续维护
+
+每次继续：读本文、进度表和相关代码；从确切未完成增量继续，不重启整门课程。
+结束时依据学习者提供的代码/结果更新任务状态，不能推定看完教程意味着所有概念熟练。
+
+每周 D7：总结预算/实际时间、证据、预测错误、错题、基础表达、岗位反馈；
+最多保留 3 个高优先级问题，并修订下一周每日任务。
+W03～W12 的每日安排为暂定队列，科研/岗位反馈变化时顺延或削减选做项。
+
+本次已采纳并建立新路线；还没有发生的学习、测试、性能与投递均保持待执行。

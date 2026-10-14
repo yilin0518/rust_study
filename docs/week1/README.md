@@ -1,5 +1,7 @@
 # Week 1 文档说明
 
+> 本目录保留网络、Future、Tokio 的历史主题材料。2026-10-13 起当前学习主题为 [HTTP、Axum 与内存商品服务](../backend/study_materials/http_axum_in_memory_products.md)，进度见 [LEARNING_PLAN](../../LEARNING_PLAN.md)。
+
 新的学习材料按**主题**组织，每个主题有一份完整的中文文档，不按自然日拆分。文档包括知识模型、预测问题、任务、实验、常见错误、分级提示、复盘题、参考资料和完成标准。一个主题可以分多次学习，每次从同一份文档继续。
 
 `lesson_plans/` 与旧的 `dayN_*.md` 文件保留为已有学习记录；它们的 Day 标签不再规定新文档的边界。
@@ -8,12 +10,12 @@
 
 当前总览见 [../week1_learning_plan.md](../week1_learning_plan.md)。
 
-当前主题：
+原阶段主题：
 
 ```text
 study_materials/
 ├── future_poll_waker_executor.md
-└── tokio_runtime_async_tcp.md   ← 当前
+└── tokio_runtime_async_tcp.md
 ```
 
 不再创建独立的 `sessions/` 或按日期命名的材料。主题文档是多次学习的同一入口；对话负责指出当前章节并进行代码审查。

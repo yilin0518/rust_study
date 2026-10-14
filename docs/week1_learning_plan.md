@@ -1,5 +1,7 @@
 # Week 1: Networking, Concurrency, and Async Foundations
 
+> 历史网络练习计划。2026-10-13 起当前主线见 [后端学习入口](backend/README.md)。这里的 Week/Day 编号与新路线编号不连续，后续小节保留原教学记录。
+
 ## Week outcome
 
 Build and explain the evolution from a single-client blocking TCP server to a
