@@ -1,6 +1,6 @@
 # Backend Career Learning Plan
 
-更新日期：2026-10-13。本文是当前目标、学习阶段与下一任务的主要状态入口。
+更新日期：2026-11-05。本文是当前目标、学习阶段与下一任务的主要状态入口。
 详细任务、项目契约和证据分别放在链接文档中，避免反复维护多份完整日程。
 
 ## 1. Background — 个人背景
@@ -51,6 +51,7 @@ Rust 项目用来建立后端知识模型；Go 项目用来迁移这些模型并
 当前执行文档：
 
 - [学习入口](docs/backend/README.md)
+- [第一周执行计划](docs/backend/week1_plan.md)
 - [12 周计划](docs/backend/roadmap_12_weeks.md)
 - [一年路线](docs/backend/roadmap_one_year.md)
 - [Rust → Go 阶段切换与第二项目](docs/backend/go_project_phase.md)
@@ -120,6 +121,7 @@ Rust 项目用来建立后端知识模型；Go 项目用来迁移这些模型并
 | C++ 算法与岗位基线 | 待诊断与收集，不虚构题数或投递记录 |
 
 当前新路线位置：**Week 1 / Day 1（W01-D1），待开始/待验收**。
+2026-11-05 检查：Axum 示例仍为 Hello World；第一周执行计划已细化，尚未进行新功能实现与运行验收。
 这是新计划入口，不是已经完成一天的声明；旧网络 Week 1 仅为历史编号。
 
 ## 8. Current Exercise — 当前练习

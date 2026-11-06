@@ -1,9 +1,10 @@
 # 后端就业学习入口
 
-更新日期：2026-10-13。当前主线：先 Rust + Axum + MySQL 的 Mini Order Service，再 Go 后端项目；C++ 用于算法训练。
+更新日期：2026-11-05。当前主线：先 Rust + Axum + MySQL 的 Mini Order Service，再 Go 后端项目；C++ 用于算法训练。
 
 | 文档 | 用途 |
 |---|---|
+| [第一周执行计划](week1_plan.md) | 当前入口：内存商品服务，7 个任务日、资料、耗时与验收 |
 | [12 周任务计划](roadmap_12_weeks.md) | 周目标、每日理论/实践/算法/面试任务、时间和验收 |
 | [一年路线](roadmap_one_year.md) | Rust → Go 两阶段成果与投递节奏 |
 | [Go 项目阶段](go_project_phase.md) | Rust 切换门槛、Go 学习顺序与第二项目暂定范围 |
